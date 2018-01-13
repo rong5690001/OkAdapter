@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by chen.huarong on 2018/1/10.
+ * 数据绑定接口
  */
 
 public interface IItemViewBind<T> {

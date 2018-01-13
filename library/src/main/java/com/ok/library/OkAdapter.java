@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,7 @@ public abstract class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     Context mContext;
     @LayoutRes
     int layoutId;
+    WeakReference<RecyclerView> mRecyclerView;
 
     public OkAdapter(Context context, List datas, int layoutId) {
         mDatas = datas == null ? new ArrayList() : datas;
@@ -69,12 +71,34 @@ public abstract class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         return super.getItemViewType(position);
     }
 
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = new WeakReference<>(recyclerView);
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        if (mRecyclerView != null) {
+            mRecyclerView.clear();
+            mRecyclerView = null;
+        }
+    }
+
     public <T> T getItem(int position) {
         if (position < mDatas.size()) {
             return (T) mDatas.get(position);
         } else {
-            return null;
+            throw new IndexOutOfBoundsException(String.format("IndexOutOfBounds, position:%d", position));
         }
+    }
+
+    public RecyclerView getRecyclerView() {
+        if (mRecyclerView != null) {
+            return mRecyclerView.get();
+        }
+        return null;
     }
 
     @Override

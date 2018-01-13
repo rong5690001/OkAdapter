@@ -1,47 +1,30 @@
 package com.ok.okadapter;
 
-
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
-import com.ok.HeaderView;
-import com.ok.OkAdapter;
-import com.ok.OkViewHold;
+import com.ok.library.IMultiType;
+import com.ok.library.OkAdapter;
+import com.ok.library.OkViewHold;
+
+import java.util.List;
 
 /**
- * Created by Administrator on 2018/1/3/003.
+ * Created by chen.huarong on 2018/1/10.
  */
 
-public class MainAdapter extends OkAdapter implements HeaderView {
+public class MainAdapter extends OkAdapter {
 
-    public MainAdapter(Context mContext) {
-        super(mContext, R.layout.item_main);
+    public MainAdapter(Context context, List datas, int layoutId) {
+        super(context, datas, layoutId);
     }
 
-    @Override
-    public View createHeaderView(RecyclerView parent) {
-        return inflate(R.layout.headerview, parent, false);
-    }
-
-    @Override
-    public int getHeaderId(RecyclerView.ViewHolder childViewHolder) {
-        return childViewHolder.getAdapterPosition() % 2;
-    }
-
-    @Override
-    public void bindHeaderView(View view, int position) {
-        ((TextView) view.findViewById(R.id.textView)).setText(String.valueOf(position % 2));
+    public MainAdapter(Context context, List datas, IMultiType mulitType) {
+        super(context, datas, mulitType);
     }
 
     @Override
     public void onBindViewHolder(OkViewHold holder, int position) {
-
+        super.onBindViewHolder(holder, position);
     }
 
-    @Override
-    public int getItemCount() {
-        return 20;
-    }
 }

@@ -1,5 +1,6 @@
 package com.ok.library;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
@@ -25,18 +26,37 @@ public abstract class ItemViewBind<T> implements IItemViewBind<T> {
     }
 
     public RecyclerView getRecyclerView() {
-        if (mOkAdapter != null) {
-            if (getOkAdapter() != null) {
-                return getOkAdapter().getRecyclerView();
-            }
+        if (checkAdapter()) {
+            return mOkAdapter.get().getRecyclerView();
         }
-        return null;
+        throw new NullPointerException("mOkAdapter is null, attachAdapter first");
     }
 
     public OkAdapter getOkAdapter() {
-        if (mOkAdapter != null) {
+        if (checkAdapter()) {
             return mOkAdapter.get();
         }
-        return null;
+        throw new NullPointerException("mOkAdapter is null, attachAdapter first");
     }
+
+    public Context getContext() {
+        if (checkAdapter()) {
+            return mOkAdapter.get().mContext;
+        }
+        throw new NullPointerException("mOkAdapter is null, attachAdapter first");
+    }
+
+    public boolean checkNotNull(Object object) {
+        return object != null;
+    }
+
+    /**
+     * check adapter is not null
+     *
+     * @return
+     */
+    protected boolean checkAdapter() {
+        return checkNotNull(mOkAdapter) && checkNotNull(mOkAdapter.get());
+    }
+
 }

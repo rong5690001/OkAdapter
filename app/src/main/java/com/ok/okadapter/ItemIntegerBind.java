@@ -15,7 +15,7 @@ public class ItemIntegerBind implements IItemViewBind<Integer> {
 
     @Override
     public void onBind(OkViewHold holder, int position, Integer item) {
-        holder.setText(R.id.text, "integer");
+        holder.setText(R.id.text, "Integer:" + (item instanceof Integer));
     }
 
     @Override

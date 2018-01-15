@@ -11,11 +11,11 @@ import java.util.List;
  * Created by chen.huarong on 2018/1/13.
  */
 
-public class ItemStringBind implements IItemViewBind<String> {
+public class ItemTestBeanBind implements IItemViewBind<TestBean> {
 
     @Override
-    public void onBind(OkViewHold holder, int position, String item) {
-        holder.setText(R.id.text, "String:" + (item instanceof String));
+    public void onBind(OkViewHold holder, int position, TestBean item) {
+        holder.setText(R.id.text, "TestBean:" + (item instanceof TestBean));
     }
 
     @Override
@@ -25,6 +25,6 @@ public class ItemStringBind implements IItemViewBind<String> {
 
     @Override
     public int getLayout(ViewGroup parent) {
-        return R.layout.item_string;
+        return R.layout.item_float;
     }
 }

@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
                 return 0;
             } else if (object instanceof Integer) {
                 return 1;
-            } else {
+            } else if (object instanceof Float) {
                 return 2;
+            } else {
+                return 3;
             }
         }
 
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     return new ItemIntegerBind();
                 case 2:
                     return new ItemFloatBind();
+                case 3:
+                    return new ItemTestBeanBind();
                 default:
                     return new ItemStringBind();
             }
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         data.add("String");
         data.add(1);
         data.add(0.1f);
+        data.add(new TestBean());
         mRecyclerView.setAdapter(new MainAdapter(this, data, mIMultiType));
     }
 

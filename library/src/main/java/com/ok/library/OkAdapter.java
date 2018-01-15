@@ -95,15 +95,19 @@ public abstract class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     }
 
     public RecyclerView getRecyclerView() {
-        if (mRecyclerView != null) {
-            return mRecyclerView.get();
+        if (mRecyclerView == null) {
+            throw new NullPointerException("recyclerView is null, adapter need set to recyclerView first!");
         }
-        return null;
+        return mRecyclerView.get();
     }
 
     @Override
     public int getItemCount() {
         return mDatas == null ? 0 : mDatas.size();
+    }
+
+    public List getDatas() {
+        return mDatas;
     }
 
     public boolean add(Object item) {

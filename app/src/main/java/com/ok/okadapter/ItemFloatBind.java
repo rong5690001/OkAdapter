@@ -15,7 +15,7 @@ public class ItemFloatBind implements IItemViewBind<Float> {
 
     @Override
     public void onBind(OkViewHold holder, int position, Float item) {
-
+        holder.setText(R.id.text, "Float:" + (item instanceof Float));
     }
 
     @Override

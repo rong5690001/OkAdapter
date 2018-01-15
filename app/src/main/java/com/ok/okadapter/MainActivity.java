@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.ok.library.IItemViewBind;
 import com.ok.library.IMultiType;
+import com.ok.library.OkAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(1);
         data.add(0.1f);
         data.add(new TestBean());
-        mRecyclerView.setAdapter(new MainAdapter(this, data, mIMultiType));
+        mRecyclerView.setAdapter(new OkAdapter(this, data, mIMultiType));
     }
 
 

@@ -20,7 +20,7 @@ allprojects {
 
 ``` 
 dependencies {
-  compile 'com.github.User:Repo:Tag'
+  compile 'com.github.rong5690001:OkAdapter:1.0'
 }
 ```
 

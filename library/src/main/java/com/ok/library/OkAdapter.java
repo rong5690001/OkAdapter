@@ -15,7 +15,7 @@ import java.util.List;
  * Created by chen.huarong on 2017/12/26.
  */
 
-public abstract class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
+public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
     List mDatas;
     IMultiType mMulitType;

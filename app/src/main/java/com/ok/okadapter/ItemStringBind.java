@@ -25,7 +25,7 @@ public class ItemStringBind extends ItemViewBind<String> {
     }
 
     @Override
-    public int getLayout(ViewGroup parent) {
+    public int getLayoutId() {
         return R.layout.item_string;
     }
 }

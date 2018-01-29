@@ -1,5 +1,6 @@
 package com.ok.library;
 
+import android.support.annotation.LayoutRes;
 import android.view.ViewGroup;
 
 import java.util.List;
@@ -15,6 +16,6 @@ public interface IItemViewBind<T> {
 
     void onBind(OkViewHold holder, int position, List data);
 
-    int getLayout(ViewGroup parent);
+    @LayoutRes int getLayoutId();
 
 }

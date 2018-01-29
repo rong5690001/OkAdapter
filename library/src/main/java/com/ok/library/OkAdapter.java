@@ -2,13 +2,13 @@ package com.ok.library;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,57 +17,49 @@ import java.util.List;
 
 public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
+    @NonNull
     List mDatas;
-    IMultiType mMulitType;
+    @NonNull
     Context mContext;
-    @LayoutRes
-    int layoutId;
     WeakReference<RecyclerView> mRecyclerView;
+    @NonNull
+    IClass2Bind mClass2Bind;
 
-    public <T> OkAdapter(Context context, List datas, ItemViewBind<T> itemViewBind) {
-        mDatas = datas == null ? new ArrayList() : datas;
-        mContext = context;
+    public OkAdapter(Context context, List datas) {
+        this(context, datas, new Class2Bind());
     }
 
-    public OkAdapter(Context context, List datas, IMultiType mulitType) {
-        mDatas = datas == null ? new ArrayList() : datas;
-        mMulitType = mulitType;
-        mContext = context;
+    public OkAdapter(@NonNull Context context
+            , @NonNull List datas
+            , @NonNull IClass2Bind iClass2Bind) {
+        this.mContext = context;
+        this.mDatas = datas;
+        this.mClass2Bind = iClass2Bind;
     }
 
     @Override
     public final OkViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        if (mMulitType != null) {
-            view = inflate(parent, mMulitType.getItemViewBind(viewType).getLayout(parent));
-        } else {
-            view = inflate(parent, layoutId);
-        }
+        View view = LayoutInflater
+                .from(this.mContext)
+                .inflate(this.mClass2Bind.getBind(viewType).getLayoutId()
+                        , parent, false);
         return new OkViewHold(view);
     }
 
     @Override
     public void onBindViewHolder(OkViewHold holder, int position) {
-        if (mMulitType != null) {
-            ItemViewBind itemViewBind = mMulitType.getItemViewBind(getItemViewType(position));
-            itemViewBind.onBind(holder, position, getItem(position));
-        }
+        throw new IllegalAccessError("use onBindViewHolder(OkViewHold holder, int position, List datas) instead.");
     }
 
     @Override
     public void onBindViewHolder(OkViewHold holder, int position, List datas) {
-        if (mMulitType != null) {
-            IItemViewBind itemViewBind = mMulitType.getItemViewBind(getItemViewType(position));
-            itemViewBind.onBind(holder, position, getItem(position));
-        }
+        getItemViewBind(position).onBind(holder, position, datas);
+        getItemViewBind(position).onBind(holder, position, getItem(position));
     }
 
     @Override
     public final int getItemViewType(int position) {
-        if (mMulitType != null) {
-            return mMulitType.getItemViewType(getItem(position), position);
-        }
-        return super.getItemViewType(position);
+        return mClass2Bind.indexOfViewBind(getItem(position).getClass());
     }
 
     @Override
@@ -85,6 +77,17 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         }
     }
 
+    /**
+     * 注册类型
+     *
+     * @param clazz
+     * @param itemViewBind
+     */
+    public void register(Class clazz, ItemViewBind itemViewBind) {
+        itemViewBind.attachAdapter(this);
+        mClass2Bind.register(clazz, itemViewBind);
+    }
+
     public <T> T getItem(int position) {
         if (position < mDatas.size()) {
             return (T) mDatas.get(position);
@@ -99,6 +102,15 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         }
         return mRecyclerView.get();
     }
+
+    private ItemViewBind getItemViewBind(int position) {
+        if (mClass2Bind == null) {
+            throw new NullPointerException("mClass2Bind is null");
+        }
+
+        return mClass2Bind.getBind(getItem(position).getClass());
+    }
+
 
     @Override
     public int getItemCount() {

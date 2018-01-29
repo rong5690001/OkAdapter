@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * Created by chen.huarong on 2018/1/13.
@@ -13,6 +14,16 @@ import java.lang.ref.WeakReference;
 public abstract class ItemViewBind<T> implements IItemViewBind<T> {
 
     private WeakReference<OkAdapter> mOkAdapter;
+
+    @Override
+    public void onBind(OkViewHold holder, int position, T item) {
+
+    }
+
+    @Override
+    public void onBind(OkViewHold holder, int position, List data) {
+
+    }
 
     public void attachAdapter(OkAdapter okAdapter) {
         this.mOkAdapter = new WeakReference<>(okAdapter);

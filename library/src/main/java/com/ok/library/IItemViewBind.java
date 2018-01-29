@@ -16,4 +16,5 @@ public interface IItemViewBind<T> {
     void onBind(OkViewHold holder, int position, List data);
 
     int getLayout(ViewGroup parent);
+
 }

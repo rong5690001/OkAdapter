@@ -9,5 +9,5 @@ public interface IMultiType {
 
     int getItemViewType(Object object, int position);
 
-    IItemViewBind getItemViewBind(int viewType);
+    ItemViewBind getItemViewBind(int viewType);
 }

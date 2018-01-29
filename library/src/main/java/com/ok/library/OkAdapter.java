@@ -24,10 +24,9 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     int layoutId;
     WeakReference<RecyclerView> mRecyclerView;
 
-    public OkAdapter(Context context, List datas, int layoutId) {
+    public <T> OkAdapter(Context context, List datas, ItemViewBind<T> itemViewBind) {
         mDatas = datas == null ? new ArrayList() : datas;
         mContext = context;
-        this.layoutId = layoutId;
     }
 
     public OkAdapter(Context context, List datas, IMultiType mulitType) {
@@ -50,7 +49,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     @Override
     public void onBindViewHolder(OkViewHold holder, int position) {
         if (mMulitType != null) {
-            IItemViewBind itemViewBind = mMulitType.getItemViewBind(getItemViewType(position));
+            ItemViewBind itemViewBind = mMulitType.getItemViewBind(getItemViewType(position));
             itemViewBind.onBind(holder, position, getItem(position));
         }
     }

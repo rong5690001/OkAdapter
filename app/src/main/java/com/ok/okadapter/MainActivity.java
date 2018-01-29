@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.ok.library.IItemViewBind;
 import com.ok.library.IMultiType;
+import com.ok.library.ItemViewBind;
 import com.ok.library.OkAdapter;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public IItemViewBind getItemViewBind(int viewType) {
+        public ItemViewBind getItemViewBind(int viewType) {
             switch (viewType) {
                 case 0:
                     return new ItemStringBind();

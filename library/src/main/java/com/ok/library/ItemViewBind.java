@@ -25,6 +25,11 @@ public abstract class ItemViewBind<T> implements IItemViewBind<T> {
 
     }
 
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
     public void attachAdapter(OkAdapter okAdapter) {
         this.mOkAdapter = new WeakReference<>(okAdapter);
     }

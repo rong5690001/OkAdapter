@@ -18,12 +18,13 @@ import java.util.List;
 public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
     @NonNull
+    private
     List mDatas;
     @NonNull
     Context mContext;
-    WeakReference<RecyclerView> mRecyclerView;
+    private WeakReference<RecyclerView> mRecyclerView;
     @NonNull
-    IClass2Bind mClass2Bind;
+    private IClass2Bind mClass2Bind;
 
     public OkAdapter(Context context, List datas) {
         this(context, datas, new Class2Bind());
@@ -39,10 +40,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
     @Override
     public final OkViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater
-                .from(this.mContext)
-                .inflate(this.mClass2Bind.getBind(viewType).getLayoutId()
-                        , parent, false);
+        View view = inflate(parent, this.mClass2Bind.getBind(viewType).getLayoutId());
         return new OkViewHold(view);
     }
 
@@ -96,7 +94,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         }
     }
 
-    public RecyclerView getRecyclerView() {
+    RecyclerView getRecyclerView() {
         if (mRecyclerView == null) {
             throw new NullPointerException("recyclerView is null, adapter need set to recyclerView first!");
         }
@@ -104,17 +102,18 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     }
 
     private ItemViewBind getItemViewBind(int position) {
-        if (mClass2Bind == null) {
-            throw new NullPointerException("mClass2Bind is null");
-        }
-
         return mClass2Bind.getBind(getItem(position).getClass());
     }
 
 
     @Override
     public int getItemCount() {
-        return mDatas == null ? 0 : mDatas.size();
+        return mDatas.size();
+    }
+
+    @NonNull
+    public IClass2Bind getClass2Bind() {
+        return mClass2Bind;
     }
 
     public List getDatas() {
@@ -137,7 +136,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         return mDatas.removeAll(items);
     }
 
-    public View inflate(ViewGroup parent, @LayoutRes int layoutId) {
+    private View inflate(ViewGroup parent, @LayoutRes int layoutId) {
         return LayoutInflater.from(mContext).inflate(layoutId, parent, false);
     }
 }

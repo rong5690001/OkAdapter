@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 /**
  * Created by chen.huarong on 2018/1/29.
+ * class map ItemViewBind
  */
 
 public interface IClass2Bind {

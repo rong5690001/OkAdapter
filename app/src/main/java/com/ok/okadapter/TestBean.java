@@ -5,4 +5,7 @@ package com.ok.okadapter;
  */
 
 public class TestBean {
+
+
+
 }

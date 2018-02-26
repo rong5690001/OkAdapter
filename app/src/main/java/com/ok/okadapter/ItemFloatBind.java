@@ -15,7 +15,7 @@ public class ItemFloatBind extends ItemViewBind<Float> {
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutId(int viewType) {
         return R.layout.item_float;
     }
 }

@@ -40,7 +40,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
     @Override
     public final OkViewHold onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflate(parent, this.mClass2Bind.getBind(viewType).getLayoutId());
+        View view = inflate(parent, this.mClass2Bind.getBind(viewType).getLayoutId(viewType));
         return new OkViewHold(view);
     }
 

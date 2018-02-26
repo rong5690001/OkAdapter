@@ -26,7 +26,7 @@ public abstract class ItemViewBind<T> implements IItemViewBind<T> {
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutId(int viewType) {
         return 0;
     }
 

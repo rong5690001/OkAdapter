@@ -15,7 +15,7 @@ public class ItemIntegerBind extends ItemViewBind<Integer> {
     }
 
     @Override
-    public int getLayoutId() {
+    public int getLayoutId(int viewType) {
         return R.layout.item_integer;
     }
 }

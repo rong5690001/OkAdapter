@@ -16,6 +16,6 @@ public interface IItemViewBind<T> {
     void onBind(OkViewHold holder, int position, List data);
 
     @LayoutRes
-    int getLayoutId();
+    int getLayoutId(int viewType);
 
 }

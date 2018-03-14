@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 /**
  * Created by chen.huarong on 2017/12/26.
+ *
  */
 
 public class OkViewHold extends RecyclerView.ViewHolder {
 
-    private SparseArray<View> views = new SparseArray<>();
+    private final SparseArray<View> views = new SparseArray<>();
 
     public OkViewHold(View itemView) {
         super(itemView);
@@ -31,11 +32,21 @@ public class OkViewHold extends RecyclerView.ViewHolder {
     }
 
     public void setText(@IdRes int id, @StringRes int resId) {
-        ((TextView) findViewById(id)).setText(resId);
+        TextView textView = findViewById(id);
+        if (textView == null) {
+            throw new NullPointerException("can't find view with id!");
+        } else {
+            textView.setText(resId);
+        }
     }
 
     public void setText(@IdRes int id, String res) {
-        ((TextView) findViewById(id)).setText(res);
+        TextView textView = findViewById(id);
+        if (textView == null) {
+            throw new NullPointerException("can't find view with id!");
+        } else {
+            textView.setText(res);
+        }
     }
 
 }

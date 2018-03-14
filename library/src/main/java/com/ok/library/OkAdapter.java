@@ -10,9 +10,11 @@ import android.view.ViewGroup;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by chen.huarong on 2017/12/26.
+ *
  */
 
 public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
@@ -78,8 +80,8 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     /**
      * 注册类型
      *
-     * @param clazz
-     * @param itemViewBind
+     * @param clazz 类型
+     * @param itemViewBind bind类
      */
     public void register(Class clazz, ItemViewBind itemViewBind) {
         itemViewBind.attachAdapter(this);
@@ -90,7 +92,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         if (position < mDatas.size()) {
             return (T) mDatas.get(position);
         } else {
-            throw new IndexOutOfBoundsException(String.format("IndexOutOfBounds, position:%d", position));
+            throw new IndexOutOfBoundsException(String.format(Locale.CHINESE, "IndexOutOfBounds, position:%d", position));
         }
     }
 
@@ -116,6 +118,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         return mClass2Bind;
     }
 
+    @NonNull
     public List getDatas() {
         return mDatas;
     }

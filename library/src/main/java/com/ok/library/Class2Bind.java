@@ -1,6 +1,5 @@
 package com.ok.library;
 
-import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by chen.huarong on 2018/1/29.
+ * The connector for the class and ItemViewBind.
  */
 
 public class Class2Bind implements IClass2Bind {
@@ -28,6 +28,13 @@ public class Class2Bind implements IClass2Bind {
 
     @Override
     public ItemViewBind getBind(int viewType) {
+        if (mItemViewBinds.size() == 0) {
+            throw new AssertionError("need register itemViewBind first");
+        }
+
+        if (viewType == -1) {
+            throw new AssertionError("Some itemViewBind is not registered.");
+        }
         return mItemViewBinds.get(viewType);
     }
 

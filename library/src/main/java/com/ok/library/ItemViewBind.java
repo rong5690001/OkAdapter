@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created by chen.huarong on 2018/1/13.
- * 所有的ItemViewBind需要继续此类或者实现IItemViewBind
+ * All ItemViewBind needs to continue this class or implement IItemViewBind.
  */
 
 public abstract class ItemViewBind<T> implements IItemViewBind<T> {

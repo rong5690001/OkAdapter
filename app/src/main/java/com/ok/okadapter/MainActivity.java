@@ -1,13 +1,11 @@
 package com.ok.okadapter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.ok.library.IItemViewBind;
-import com.ok.library.IMultiType;
-import com.ok.library.ItemViewBind;
 import com.ok.library.OkAdapter;
 
 import java.util.ArrayList;
@@ -25,21 +23,23 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         List data = new ArrayList();
         data.add("String");
-        data.add(1);
-        data.add(0.1f);
+//        data.add(1);
+//        data.add(0.1f);
         data.add("String");
-        data.add(1);
-        data.add(0.1f);
+//        data.add(1);
+//        data.add(0.1f);
         data.add("String");
-        data.add(1);
-        data.add(0.1f);
-        data.add(new TestBean());
+//        data.add(1);
+//        data.add(0.1f);
+//        data.add(new TestBean());
         OkAdapter okAdapter = new OkAdapter(this, data);
         okAdapter.register(String.class, new ItemStringBind());
-        okAdapter.register(Integer.class, new ItemIntegerBind());
-        okAdapter.register(Float.class, new ItemFloatBind());
-        okAdapter.register(TestBean.class, new ItemTestBeanBind());
+//        okAdapter.register(Integer.class, new ItemIntegerBind());
+//        okAdapter.register(Float.class, new ItemFloatBind());
+//        okAdapter.register(TestBean.class, new ItemTestBeanBind());
         mRecyclerView.setAdapter(okAdapter);
+
+        startActivity(new Intent(this, VerticalViewPagerActivity.class));
     }
 
 

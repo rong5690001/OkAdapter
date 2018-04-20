@@ -14,7 +14,7 @@ import java.util.Locale;
 
 /**
  * Created by chen.huarong on 2017/12/26.
- *
+ * Complex list Adapter.
  */
 
 public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
@@ -59,7 +59,11 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
 
     @Override
     public final int getItemViewType(int position) {
-        return mClass2Bind.indexOfViewBind(getItem(position).getClass());
+        int viewType = mClass2Bind.indexOfViewBind(getItem(position).getClass());
+        if (viewType == -1) {
+            throw new AssertionError("Some itemViewBind is not registered.");
+        }
+        return viewType;
     }
 
     @Override
@@ -80,7 +84,7 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
     /**
      * 注册类型
      *
-     * @param clazz 类型
+     * @param clazz        类型
      * @param itemViewBind bind类
      */
     public void register(Class clazz, ItemViewBind itemViewBind) {
@@ -92,7 +96,8 @@ public class OkAdapter extends RecyclerView.Adapter<OkViewHold> {
         if (position < mDatas.size()) {
             return (T) mDatas.get(position);
         } else {
-            throw new IndexOutOfBoundsException(String.format(Locale.CHINESE, "IndexOutOfBounds, position:%d", position));
+            throw new IndexOutOfBoundsException(String.format(Locale.CHINESE, "IndexOutOfBounds, position:%d",
+                    position));
         }
     }
 
